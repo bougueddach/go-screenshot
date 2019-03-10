@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"go-screenshot/api"
+)
 
 func main() {
-	fmt.Print("holaaa \n")
+	api.Do()
 }
