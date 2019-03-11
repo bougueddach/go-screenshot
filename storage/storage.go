@@ -1,26 +1,34 @@
-package chrome
+package storage
 
 import (
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"
-
 	log "github.com/sirupsen/logrus"
-
 	"github.com/tidwall/buntdb"
+	"go-screenshot/chrome"
 )
 
+type Storage interface {
+	Open() error
+}
+
 // Storage handles the pointer to a buntdb instance
-type Storage struct {
-	Db *buntdb.DB
+type FileStorage struct {
+	Db   *buntdb.DB
+	path string
+}
+
+func NewFileStorage(path string) *FileStorage {
+	return &FileStorage{path: path}
 }
 
 // Open creates a new connection to a buntdb database
-func (storage *Storage) Open(path string) error {
+func (storage *FileStorage) Open() error {
 
-	log.WithField("database-location", path).Debug("Opening buntdb")
+	log.WithField("database-location", storage.path).Debug("Opening buntdb")
 
-	db, err := buntdb.Open(path)
+	db, err := buntdb.Open(storage.path)
 	if err != nil {
 		return err
 	}
@@ -33,8 +41,15 @@ func (storage *Storage) Open(path string) error {
 	return nil
 }
 
+// Close closes the connection to a buntdb connection
+func (storage *FileStorage) Close() {
+
+	log.Debug("Closing buntdb")
+	storage.Db.Close()
+}
+
 // SetHTTPData stores HTTP information about a URL
-func (storage *Storage) SetHTTPData(data *HTTResponse) {
+func (storage *FileStorage) SetHTTPData(data *chrome.HTTResponse) {
 
 	// marshal the data
 	jsonData, err := json.Marshal(data)
@@ -59,11 +74,4 @@ func (storage *Storage) SetHTTPData(data *HTTResponse) {
 	if err != nil {
 		log.WithField("err", err).Fatal("Error saving HTTP response data")
 	}
-}
-
-// Close closes the connection to a buntdb connection
-func (storage *Storage) Close() {
-
-	log.Debug("Closing buntdb")
-	storage.Db.Close()
 }
