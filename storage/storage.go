@@ -11,6 +11,7 @@ import (
 
 type Storage interface {
 	Open() error
+	SetHTTPData(data *chrome.HTTResponse)
 }
 
 // Storage handles the pointer to a buntdb instance

@@ -10,7 +10,7 @@ import (
 
 var (
 	chrome     chrm.Engine
-	db         *storage.FileStorage
+	db         storage.Storage
 	dbLocation string
 
 	// 'global' flags
