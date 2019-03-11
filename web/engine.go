@@ -1,4 +1,4 @@
-package chrome
+package web
 
 import (
 	"context"

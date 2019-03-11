@@ -2,14 +2,16 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
-	chrm "go-screenshot/chrome"
-	"go-screenshot/storage"
 	"os"
+
+	"github.com/spf13/cobra"
+
+	"go-screenshot/storage"
+	"go-screenshot/web"
 )
 
 var (
-	chrome     chrm.Engine
+	chrome     web.Engine
 	db         storage.Storage
 	dbLocation string
 
@@ -34,7 +36,7 @@ var rootCmd = &cobra.Command{
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 
 		// Init Google Chrome
-		chrome = chrm.ChromeEngine(resolution, chromeTimeout, chromePath, userAgent)
+		chrome = web.ChromeEngine(resolution, chromeTimeout, chromePath, userAgent)
 		chrome.Setup()
 
 		// Setup the destination directory

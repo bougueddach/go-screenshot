@@ -1,4 +1,4 @@
-package chrome
+package web
 
 import (
 	"crypto/tls"

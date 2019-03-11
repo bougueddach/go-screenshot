@@ -4,14 +4,16 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/tidwall/buntdb"
-	"go-screenshot/chrome"
+
+	"go-screenshot/web"
 )
 
 type Storage interface {
 	Open() error
-	Store(data *chrome.HTTResponse)
+	Store(data *web.HTTResponse)
 }
 
 // Storage handles the pointer to a buntdb instance
@@ -43,7 +45,7 @@ func (storage *FileStorage) Open() error {
 }
 
 // Store stores HTTP information about a URL
-func (storage *FileStorage) Store(data *chrome.HTTResponse) {
+func (storage *FileStorage) Store(data *web.HTTResponse) {
 
 	// marshal the data
 	jsonData, err := json.Marshal(data)

@@ -1,13 +1,14 @@
-package chrome
+package web
 
 import (
 	"crypto/tls"
-	"github.com/parnurzeal/gorequest"
 	"net/url"
 	"path/filepath"
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/parnurzeal/gorequest"
 )
 
 // ProcessURL processes a URL

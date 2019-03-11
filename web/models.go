@@ -1,4 +1,4 @@
-package chrome
+package web
 
 // HTTResponse contains an HTTP response
 type HTTResponse struct {
