@@ -94,6 +94,6 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&chromePath, "chrome-path", "", "", "Full path to the Chrome executable to use. By default, gowitness will search for Google Chrome")
 	rootCmd.PersistentFlags().StringVarP(&userAgent, "user-agent", "", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36", "Alernate UserAgent string to use for Google Chrome")
 	rootCmd.PersistentFlags().StringVarP(&resolution, "resolution", "R", "1440,900", "screenshot resolution")
-	rootCmd.PersistentFlags().StringVarP(&screenshotDestination, "destination", "d", "./images", "Destination directory for screenshots")
-	rootCmd.PersistentFlags().StringVarP(&dbLocation, "db", "D", "db", "Destination for the gowitness database")
+	rootCmd.PersistentFlags().StringVarP(&screenshotDestination, "destination", "d", "./output-storage/images", "Destination directory for screenshots")
+	rootCmd.PersistentFlags().StringVarP(&dbLocation, "db", "D", "./output-storage/db", "Destination for the gowitness database")
 }
