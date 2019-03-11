@@ -6,18 +6,12 @@ import (
 	chrm "go-screenshot/chrome"
 	"go-screenshot/storage"
 	"os"
-	"time"
 )
 
 var (
-	cfgFile    string
-	chrome     chrm.Chrome
+	chrome     chrm.Engine
 	db         storage.Storage
 	dbLocation string
-
-	// logging
-	logLevel  string
-	logFormat string
 
 	// 'global' flags
 	waitTimeout   int
@@ -29,27 +23,6 @@ var (
 	// screenshot command flags
 	screenshotURL         string
 	screenshotDestination string
-
-	// file scanner command flags
-	sourceFile string
-	maxThreads int
-
-	// range scanner command flags
-	scanCidr           []string
-	scanFileCidr       string
-	scanPorts          string
-	skipHTTP           bool
-	skipHTTPS          bool
-	randomPermutations bool
-
-	// generate command
-	reportFileName string
-
-	// execution time
-	startTime = time.Now()
-
-	// version
-	version = "1.0.8"
 )
 
 var rootCmd = &cobra.Command{
@@ -61,12 +34,7 @@ var rootCmd = &cobra.Command{
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 
 		// Init Google Chrome
-		chrome = chrm.Chrome{
-			Resolution:    resolution,
-			ChromeTimeout: chromeTimeout,
-			Path:          chromePath,
-			UserAgent:     userAgent,
-		}
+		chrome = chrm.ChromeEngine(resolution, chromeTimeout, chromePath, userAgent)
 		chrome.Setup()
 
 		// Setup the destination directory

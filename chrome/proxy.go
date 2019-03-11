@@ -24,15 +24,12 @@ func (proxy *forwardingProxy) start() error {
 
 	log.WithFields(log.Fields{"target-url": proxy.targetURL}).Debug("Initializing shitty forwarding proxy")
 
-	// *Dont* verify remote certificates.
-	transport := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-	}
-
 	// Start the proxy and assign our custom Transport
 	proxy.targetURL.Path = "/" // set the path to / as this becomes the base path
 	proxy.server = httputil.NewSingleHostReverseProxy(proxy.targetURL)
-	proxy.server.Transport = transport
+	proxy.server.Transport = &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
 
 	// Get an open port for this proxy instance to run on.
 	var err error
@@ -54,7 +51,6 @@ func (proxy *forwardingProxy) start() error {
 			Debug("Starting shitty forwarding proxy goroutine")
 
 		// Create an isolated ServeMux
-		//  ref: https://golang.org/pkg/net/http/#ServeMux
 		httpServer := http.NewServeMux()
 		httpServer.HandleFunc("/", proxy.handle)
 

@@ -2,6 +2,7 @@ package chrome
 
 import (
 	"context"
+	"go-screenshot/storage"
 	"net/url"
 	"os"
 	"os/exec"
@@ -16,34 +17,33 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-//type Engine interface {
-//	Setup()
-//	SetScreenshotPath(p string) error
-//	ScreenshotURL(targetURL *url.URL, destination string)
-//	chromeLocator()
-//	checkVersion(lowestVersion string) bool
-//}
+type Engine interface {
+	Setup()
+	SetScreenshotPath(p string) error
+	ScreenshotURL(targetURL *url.URL, destination string)
+	chromeLocator()
+	checkVersion(lowestVersion string) bool
+	ProcessURL(url *url.URL, timeout int) *storage.HTTResponse
+}
 
 // Chrome contains information about a Google Chrome
 // instance, with methods to run on it.
 type Chrome struct {
-	Resolution    string
-	ChromeTimeout int
-	Path          string
-	UserAgent     string
-
+	Resolution     string
+	ChromeTimeout  int
+	Path           string
+	UserAgent      string
 	ScreenshotPath string
 }
 
-//
-//func ChromeEngine(resolution string, chromeTimeout int, chromePath string, userAgent string) Engine {
-//	return &Chrome{
-//		Resolution:    resolution,
-//		ChromeTimeout: chromeTimeout,
-//		Path:          chromePath,
-//		UserAgent:     userAgent,
-//	}
-//}
+func ChromeEngine(resolution string, chromeTimeout int, chromePath string, userAgent string) Engine {
+	return &Chrome{
+		Resolution:    resolution,
+		ChromeTimeout: chromeTimeout,
+		Path:          chromePath,
+		UserAgent:     userAgent,
+	}
+}
 
 // Setup configures a Chrome struct with the path
 // specified to what is available on this system.
@@ -204,9 +204,7 @@ func (chrome *Chrome) ScreenshotURL(targetURL *url.URL, destination string) {
 		proxyURL, _ := url.Parse("http://localhost:" + strconv.Itoa(proxy.port) + "/")
 		proxyURL.Path = originalPath
 
-		// I am not 100% sure if this does anything, but lets add --allow-insecure-localhost
-		// anyways.
-		chromeArguments = append(chromeArguments, "--allow-insecure-localhost")
+		chromeArguments = append(chromeArguments)
 
 		// set the URL to call to the proxy we are starting up
 		chromeArguments = append(chromeArguments, proxyURL.String())
