@@ -1,6 +1,6 @@
 # go-screenshot
 
-This a CLI application that allow you to take web pages screenshots using the command interface
+This a CLI application that allow you to take web pages screenshots using the command line interface, it is inspired from gowitness :wink:.
 
 
 # Clone it
