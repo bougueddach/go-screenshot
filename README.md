@@ -2,6 +2,7 @@
 
 This a CLI application that allow you to take web pages screenshots using the command line interface, it is inspired from gowitness :wink:.
 
+Unfortunately I could not get enough time for unit testing
 
 # Clone it
 
