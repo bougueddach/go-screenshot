@@ -47,7 +47,7 @@ func do(urlString string) {
 	}
 	// Process this URL
 	HTTPResponseStorage := chrome.ProcessURL(u, waitTimeout)
-	db.SetHTTPData(HTTPResponseStorage)
+	db.Store(HTTPResponseStorage)
 }
 
 func init() {

@@ -11,7 +11,7 @@ import (
 
 type Storage interface {
 	Open() error
-	SetHTTPData(data *chrome.HTTResponse)
+	Store(data *chrome.HTTResponse)
 }
 
 // Storage handles the pointer to a buntdb instance
@@ -42,15 +42,8 @@ func (storage *FileStorage) Open() error {
 	return nil
 }
 
-// Close closes the connection to a buntdb connection
-func (storage *FileStorage) Close() {
-
-	log.Debug("Closing buntdb")
-	storage.Db.Close()
-}
-
-// SetHTTPData stores HTTP information about a URL
-func (storage *FileStorage) SetHTTPData(data *chrome.HTTResponse) {
+// Store stores HTTP information about a URL
+func (storage *FileStorage) Store(data *chrome.HTTResponse) {
 
 	// marshal the data
 	jsonData, err := json.Marshal(data)
