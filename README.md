@@ -20,5 +20,9 @@ Here are the steps to get you started on the project:
    <br /> `go-screenshot url --values "https://medium.com;https://detectify.com"`
 
 # Scalability thoughts!
+I don't have any experience scaling apps but here are my thoughts about what we need:
 
-    * Working on it (30 min)
+    * Add a metrics implementation for monitoring
+    * Probably we will need a load balancer and a queuing systeme
+    * If we want to continiously access the requests historic I suggest to use a real db to benefit from indexing
+    
