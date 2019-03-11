@@ -15,7 +15,6 @@ var (
 	db         storage.Storage
 	dbLocation string
 
-	// 'global' flags
 	waitTimeout   int
 	resolution    string
 	chromeTimeout int
@@ -30,9 +29,6 @@ var (
 var rootCmd = &cobra.Command{
 	Use:   "go-screenshot",
 	Short: "go-screenshot is a coding challenge for Detectify",
-	Run: func(cmd *cobra.Command, args []string) {
-		// Do Stuff Here
-	},
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 
 		// Init Google Chrome
