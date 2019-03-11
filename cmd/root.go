@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	chrm "go-screenshot/chrome"
-	"go-screenshot/storage"
 	"os"
 )
 
 var (
 	chrome     chrm.Engine
-	db         storage.Storage
+	db         chrm.Storage
 	dbLocation string
 
 	// 'global' flags
@@ -42,7 +41,7 @@ var rootCmd = &cobra.Command{
 			fmt.Println("Error in setting destination screenshot path.")
 		}
 		// open the database
-		db = storage.Storage{}
+		db = chrm.Storage{}
 		db.Open(dbLocation)
 	},
 }

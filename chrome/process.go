@@ -3,7 +3,6 @@ package chrome
 import (
 	"crypto/tls"
 	"github.com/parnurzeal/gorequest"
-	"go-screenshot/storage"
 	"net/url"
 	"path/filepath"
 	"regexp"
@@ -12,10 +11,10 @@ import (
 )
 
 // ProcessURL processes a URL
-func (chrome *Chrome) ProcessURL(url *url.URL, timeout int) *storage.HTTResponse {
+func (chrome *Chrome) ProcessURL(url *url.URL, timeout int) *HTTResponse {
 
 	// prepare some storage for this URL
-	HTTPResponseStorage := storage.HTTResponse{URL: url.String()}
+	HTTPResponseStorage := HTTResponse{URL: url.String()}
 
 	// prepare a storage instance for this URL
 	//log.WithField("url", url).Debug("Processing URL")
@@ -43,7 +42,7 @@ func (chrome *Chrome) ProcessURL(url *url.URL, timeout int) *storage.HTTResponse
 	// process response headers
 	for k, v := range resp.Header {
 		headerValue := strings.Join(v, ", ")
-		storageHeader := storage.HTTPHeader{Key: k, Value: headerValue}
+		storageHeader := HTTPHeader{Key: k, Value: headerValue}
 		HTTPResponseStorage.Headers = append(HTTPResponseStorage.Headers, storageHeader)
 
 		//log.WithFields(log.Fields{"url": url, k: headerValue}).Info("Response header")
@@ -53,11 +52,11 @@ func (chrome *Chrome) ProcessURL(url *url.URL, timeout int) *storage.HTTResponse
 	if resp.TLS != nil {
 
 		// storage for the TLS information
-		SSLCertificate := storage.SSLCertificate{}
+		SSLCertificate := SSLCertificate{}
 
 		for _, c := range resp.TLS.PeerCertificates {
 
-			SSLCertificateAttributes := storage.SSLCertificateAttributes{
+			SSLCertificateAttributes := SSLCertificateAttributes{
 				SubjectCommonName:  c.Subject.CommonName,
 				IssuerCommonName:   c.Issuer.CommonName,
 				SignatureAlgorithm: c.SignatureAlgorithm.String(),
@@ -93,7 +92,7 @@ func (chrome *Chrome) ProcessURL(url *url.URL, timeout int) *storage.HTTResponse
 	//	Debug("Generated filename for screenshot")
 
 	// Screenshot the URL
-	chrome.ScreenshotURL(finalURL, dst)
+	chrome.screenshotURL(finalURL, dst)
 
 	return &HTTPResponseStorage
 }

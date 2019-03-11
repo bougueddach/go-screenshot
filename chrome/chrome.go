@@ -2,7 +2,6 @@ package chrome
 
 import (
 	"context"
-	"go-screenshot/storage"
 	"net/url"
 	"os"
 	"os/exec"
@@ -20,10 +19,10 @@ import (
 type Engine interface {
 	Setup()
 	SetScreenshotPath(p string) error
-	ScreenshotURL(targetURL *url.URL, destination string)
+	screenshotURL(targetURL *url.URL, destination string)
 	chromeLocator()
 	checkVersion(lowestVersion string) bool
-	ProcessURL(url *url.URL, timeout int) *storage.HTTResponse
+	ProcessURL(url *url.URL, timeout int) *HTTResponse
 }
 
 // Chrome contains information about a Google Chrome
@@ -158,7 +157,7 @@ func (chrome *Chrome) SetScreenshotPath(p string) error {
 }
 
 // ScreenshotURL takes a screenshot of a URL
-func (chrome *Chrome) ScreenshotURL(targetURL *url.URL, destination string) {
+func (chrome *Chrome) screenshotURL(targetURL *url.URL, destination string) {
 
 	log.WithFields(log.Fields{"url": targetURL, "full-destination": destination}).
 		Debug("Full path to screenshot save using Chrome")

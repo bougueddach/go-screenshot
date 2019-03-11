@@ -1,4 +1,4 @@
-package storage
+package chrome
 
 import (
 	"crypto/sha1"
