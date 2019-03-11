@@ -40,16 +40,20 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-
-		u, err := url.ParseRequestURI(screenshotURL)
-		if err != nil {
-			fmt.Println("Invalid URL specified")
+		urls := strings.Split(screenshotURL, ";")
+		for _, urlString := range urls {
+			do(urlString)
 		}
-
-		// Process this URL
-		ProcessURL(u, &chrome, &db, waitTimeout)
-
 	},
+}
+
+func do(urlString string) {
+	u, err := url.ParseRequestURI(urlString)
+	if err != nil {
+		fmt.Println("Invalid URL specified")
+	}
+	// Process this URL
+	ProcessURL(u, &chrome, &db, waitTimeout)
 }
 
 func init() {
@@ -64,7 +68,7 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// urlCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	urlCmd.Flags().StringVarP(&screenshotURL, "value", "v", "", "The URL to screenshot")
+	urlCmd.Flags().StringVarP(&screenshotURL, "values", "v", "", "The URL to screenshot")
 
 }
 
