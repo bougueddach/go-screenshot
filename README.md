@@ -18,3 +18,7 @@ Here are the steps to get you started on the project:
 3) Usage Examples
    <br /> `go-screenshot url --values "https://detectify.com"`
    <br /> `go-screenshot url --values "https://medium.com;https://detectify.com"`
+
+# Scalability thoughts!
+
+    * Working on it (30 min)
