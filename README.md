@@ -23,6 +23,7 @@ Here are the steps to get you started on the project:
 I don't have any experience scaling apps but here are my thoughts about what we need:
 
     * Add a metrics implementation for monitoring
-    * Probably we will need a load balancer and a revers proxy
+    * Probably we will need a load balancer
+    * Probably we will need a queuing systeme depending on the use case that we want
     * If we want to continiously access the requests historic I suggest to use a real db to benefit from indexing
     
