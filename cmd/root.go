@@ -3,7 +3,53 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	chrm "go-screenshot/chrome"
+	"go-screenshot/storage"
 	"os"
+	"time"
+)
+
+var (
+	cfgFile    string
+	chrome     chrm.Chrome
+	db         storage.Storage
+	dbLocation string
+
+	// logging
+	logLevel  string
+	logFormat string
+
+	// 'global' flags
+	waitTimeout   int
+	resolution    string
+	chromeTimeout int
+	chromePath    string
+	userAgent     string
+
+	// screenshot command flags
+	screenshotURL         string
+	screenshotDestination string
+
+	// file scanner command flags
+	sourceFile string
+	maxThreads int
+
+	// range scanner command flags
+	scanCidr           []string
+	scanFileCidr       string
+	scanPorts          string
+	skipHTTP           bool
+	skipHTTPS          bool
+	randomPermutations bool
+
+	// generate command
+	reportFileName string
+
+	// execution time
+	startTime = time.Now()
+
+	// version
+	version = "1.0.8"
 )
 
 var rootCmd = &cobra.Command{
@@ -12,6 +58,25 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		// Do Stuff Here
 	},
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+
+		// Init Google Chrome
+		chrome = chrm.Chrome{
+			Resolution:    resolution,
+			ChromeTimeout: chromeTimeout,
+			Path:          chromePath,
+			UserAgent:     userAgent,
+		}
+		chrome.Setup()
+
+		// Setup the destination directory
+		if err := chrome.SetScreenshotPath(screenshotDestination); err != nil {
+			fmt.Println("Error in setting destination screenshot path.")
+		}
+		// open the database
+		db = storage.Storage{}
+		db.Open(dbLocation)
+	},
 }
 
 func Execute() {
@@ -19,4 +84,16 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+}
+
+func init() {
+
+	// Global flags
+	rootCmd.PersistentFlags().IntVarP(&waitTimeout, "timeout", "T", 3, "Time in seconds to wait for a HTTP connection")
+	rootCmd.PersistentFlags().IntVarP(&chromeTimeout, "chrome-timeout", "", 90, "Time in seconds to wait for Google Chrome to finish a screenshot")
+	rootCmd.PersistentFlags().StringVarP(&chromePath, "chrome-path", "", "", "Full path to the Chrome executable to use. By default, gowitness will search for Google Chrome")
+	rootCmd.PersistentFlags().StringVarP(&userAgent, "user-agent", "", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36", "Alernate UserAgent string to use for Google Chrome")
+	rootCmd.PersistentFlags().StringVarP(&resolution, "resolution", "R", "1440,900", "screenshot resolution")
+	rootCmd.PersistentFlags().StringVarP(&screenshotDestination, "destination", "d", "./images", "Destination directory for screenshots")
+	rootCmd.PersistentFlags().StringVarP(&dbLocation, "db", "D", "db", "Destination for the gowitness database")
 }

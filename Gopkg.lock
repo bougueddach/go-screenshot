@@ -26,6 +26,22 @@
   revision = "92cdf37c5b7579ebaf7a036da94b40995972088d"
 
 [[projects]]
+  digest = "1:7aefb397a53fc437c90f0fdb3e1419c751c5a3a165ced52325d5d797edf1aca6"
+  name = "github.com/moul/http2curl"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "9ac6cf4d929b2fa8fd2d2e6dec5bb0feb4f4911d"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:d776f3e95774a8719f2e57fabbbb33103035fe072dcf6f1864f33abd17b753e5"
+  name = "github.com/parnurzeal/gorequest"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3"
+  version = "v0.2.15"
+
+[[projects]]
   digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
   name = "github.com/pkg/errors"
   packages = ["."]
@@ -59,11 +75,89 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:3297205be37afe3f25875b99ad48babe2aebb6e0cf61631d6d9851ecb266370e"
+  name = "github.com/tidwall/btree"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "9876f1454cf0993a53d74c27196993e345f50dd1"
+
+[[projects]]
+  digest = "1:0d52ec71bbf60ef362ba12db486a7639acdc09e703c93c36c43a7844d071b1ce"
+  name = "github.com/tidwall/buntdb"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2da7c106683f522198cdf55ed8db42b374de50d7"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:7df351557a6d5c30804e7d6f7ed87f2fccb0619c08fcc84869a93f22bec96c11"
+  name = "github.com/tidwall/gjson"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "eee0b6226f0d1db2675a176fdfaa8419bcad4ca8"
+  version = "v1.2.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:403222dac436240f4a747c4ced09c1d5884082d920f151ea6c19abf7a75d4e7c"
+  name = "github.com/tidwall/grect"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ba9a043346eba55344e40d66a5e74cfda3a9d293"
+
+[[projects]]
+  digest = "1:8453ddbed197809ee8ca28b06bd04e127bec9912deb4ba451fea7a1eca578328"
+  name = "github.com/tidwall/match"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "33827db735fff6510490d69a8622612558a557ed"
+  version = "v1.0.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:88611438dc87bda5862e2d12d8e901bac8ebfd4a9034a896d2f69835360439a7"
+  name = "github.com/tidwall/pretty"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "65a9db5fad5105a89e17f38adcc9878685be6d78"
+
+[[projects]]
+  branch = "master"
+  digest = "1:54fec16397c72e6ecb5e61309e369517d4ea7aaee4d97454c36075539039ad85"
+  name = "github.com/tidwall/rtree"
+  packages = [
+    ".",
+    "base",
+  ]
+  pruneopts = "UT"
+  revision = "6cd427091e0e662cb4f8e2c9eb1a41e1c46ff0d3"
+
+[[projects]]
+  branch = "master"
+  digest = "1:1b885e925ee7c05565b3178a4fa818bf33885878344d8629ac433a5db99d58e4"
+  name = "github.com/tidwall/tinyqueue"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "1e39f55115634cad2c504631c8bfcc292f2c9c55"
+
+[[projects]]
+  branch = "master"
   digest = "1:058e9504b9a79bfe86092974d05bb3298d2aa0c312d266d43148de289a5065d9"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
   pruneopts = "UT"
   revision = "c2843e01d9a2bc60bb26ad24e09734fdc2d9ec58"
+
+[[projects]]
+  branch = "master"
+  digest = "1:b6a3256ffb6ee9d7e7159c062f57e091c30c19e13ac3c676729baac7d83ecd21"
+  name = "golang.org/x/net"
+  packages = [
+    "idna",
+    "publicsuffix",
+  ]
+  pruneopts = "UT"
+  revision = "c10a0554eabf8a6a7a6cc3097c9d9f43dcee0a43"
 
 [[projects]]
   branch = "master"
@@ -76,14 +170,39 @@
   pruneopts = "UT"
   revision = "10058d7d4faa7dd5ef860cbd31af00903076e7b8"
 
+[[projects]]
+  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
+  version = "v0.3.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/mcuadros/go-version",
+    "github.com/parnurzeal/gorequest",
     "github.com/pkg/errors",
     "github.com/sirupsen/logrus",
     "github.com/spf13/cobra",
+    "github.com/tidwall/buntdb",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
