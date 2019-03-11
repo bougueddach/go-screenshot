@@ -8,7 +8,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "go-screenshot",
-	Short: "Hugo is a very fast static site generator",
+	Short: "go-screenshot is a coding challenge for Detectify",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Do Stuff Here
 	},
