@@ -16,5 +16,5 @@ Here are the steps to get you started on the project:
     `make install`
 
 3) Usage Examples
-    `go-screenshot url --values "https://detectify.com"`
-    `go-screenshot url --values "https://medium.com;https://detectify.com"`
+   <br /> `go-screenshot url --values "https://detectify.com"`
+   <br /> `go-screenshot url --values "https://medium.com;https://detectify.com"`
